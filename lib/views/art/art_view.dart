@@ -27,7 +27,7 @@ class ArtView extends StatelessWidget {
             mainAxisExtent: 180,
             mainAxisSpacing: 10,
           ),
-          itemCount: 1,
+          itemCount: 5,
           itemBuilder: (_, __) {
             return ArtBlock();
           },
