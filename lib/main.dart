@@ -12,9 +12,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'goularte app',
       theme: ThemeData(
-          scaffoldBackgroundColor: Color(0xffF4F3EE),
-          appBarTheme:
-              AppBarTheme(elevation: 0, backgroundColor: Color(0xffD55759))),
+        scaffoldBackgroundColor: Color(0xffF4F3EE),
+        appBarTheme: AppBarTheme(
+          elevation: 0,
+          backgroundColor: Color(0xffD55759),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       home: BaseView(),
     );

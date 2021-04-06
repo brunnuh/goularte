@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:goularte/views/art/art_view.dart';
 import 'package:goularte/views/ideas/ideas_view.dart';
 
 class BaseView extends StatelessWidget {
-  PageController pageController = PageController(initialPage: 1);
+  PageController pageController = PageController(initialPage: 2);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,7 @@ class BaseView extends StatelessWidget {
               color: Colors.orange,
             ),
             IdeasView(),
-            Container(
-              color: Colors.purple,
-            )
+            ArtView(),
           ],
         ),
         Positioned(
