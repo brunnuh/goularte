@@ -32,11 +32,17 @@ dependencies:
   cached_network_image: ^3.0.0
   line_icons: ^2.0.1
   google_fonts: ^2.0.0
+  youtube_explode_dart: ^1.9.1
+  mobx: ^2.0.1
+  flutter_mobx: ^2.0.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build_runner: ^1.12.2
+  mobx_codegen: ^2.0.1+2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -50,8 +56,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/image1.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
