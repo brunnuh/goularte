@@ -25,7 +25,7 @@ abstract class _YoutubeController with Store {
         if (videos.author.toLowerCase() == "goularte") ytVideos.add(videos);
       });
     } catch (e) {
-      error = e;
+      error = e.toString();
     }
   }
 }

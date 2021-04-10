@@ -15,14 +15,22 @@ class BottomBar extends StatelessWidget {
           CardButton(
             icon: LineIcons.youtube,
             size: 30,
+            page: 0,
           ),
           CardButton(
             icon: LineIcons.comments,
             size: 30,
+            page: 1,
           ),
           CardButton(
             icon: LineIcons.photoVideo,
             size: 30,
+            page: 2,
+          ),
+          CardButton(
+            icon: LineIcons.user,
+            size: 30,
+            page: 3,
           ),
         ],
       ),

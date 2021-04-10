@@ -21,7 +21,7 @@ class ArtBlock extends StatelessWidget {
       },
       child: Card(
         shape: Border.all(
-          color: Theme.of(context).appBarTheme.color,
+          color: Theme.of(context).appBarTheme.color ?? Colors.redAccent,
           width: 3,
         ),
         child: CachedNetworkImage(
