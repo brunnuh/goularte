@@ -1,0 +1,2 @@
+// user
+const keyUserPhoto = 'photo';

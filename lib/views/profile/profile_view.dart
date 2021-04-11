@@ -32,7 +32,7 @@ class ProfileView extends StatelessWidget {
                 ? Center(
                     child: Login(),
                   )
-                : TopInformation(_loginController),
+                : TopInformation(),
             const SizedBox(
               height: 40,
             ),

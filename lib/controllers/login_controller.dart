@@ -24,6 +24,9 @@ abstract class _LoginController with Store {
   User user = User();
 
   @action
+  void setUser(User value) => user = value;
+
+  @action
   void setEmail(String value) => email = value;
 
   @computed
@@ -84,7 +87,6 @@ abstract class _LoginController with Store {
       user =
           await UserRepository().login(User(email: email, password: password));
       if (user != null) {
-        print("por aqui");
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
                 builder: (_) => BaseView(

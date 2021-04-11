@@ -132,6 +132,17 @@ mixin _$LoginController on _LoginController, Store {
       ActionController(name: '_LoginController');
 
   @override
+  void setUser(User value) {
+    final _$actionInfo = _$_LoginControllerActionController.startAction(
+        name: '_LoginController.setUser');
+    try {
+      return super.setUser(value);
+    } finally {
+      _$_LoginControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setEmail(String value) {
     final _$actionInfo = _$_LoginControllerActionController.startAction(
         name: '_LoginController.setEmail');
