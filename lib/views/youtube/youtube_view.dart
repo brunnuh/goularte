@@ -14,9 +14,9 @@ class YoutubeView extends StatelessWidget {
         itemCount: searchList.length,
         itemBuilder: (_, index) {
           return Container(
-            height: 140,
+            //height: 140,
             margin: index == searchList.length - 1
-                ? EdgeInsets.only(bottom: 40)
+                ? EdgeInsets.only(bottom: 70)
                 : null,
             child: YoutubeCard(youtubeItem: searchList[index]),
           );

@@ -10,6 +10,7 @@ class User {
   User({this.name, this.password, this.email, this.photo});
 
   factory User.fromJson(ParseUser parseUser) {
+    // por de fromjson para fromparse
     return User(
       name: parseUser.username,
       email: parseUser.emailAddress,

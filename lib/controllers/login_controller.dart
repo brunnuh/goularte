@@ -104,4 +104,10 @@ abstract class _LoginController with Store {
   Future<void> _verifyToken() async {
     user = await UserRepository().verifyToken();
   }
+
+  @observable
+  bool passwordVisible = false;
+
+  @action
+  void setVisible() => passwordVisible = !passwordVisible;
 }

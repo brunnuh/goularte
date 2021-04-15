@@ -113,6 +113,21 @@ mixin _$LoginController on _LoginController, Store {
     });
   }
 
+  final _$passwordVisibleAtom = Atom(name: '_LoginController.passwordVisible');
+
+  @override
+  bool get passwordVisible {
+    _$passwordVisibleAtom.reportRead();
+    return super.passwordVisible;
+  }
+
+  @override
+  set passwordVisible(bool value) {
+    _$passwordVisibleAtom.reportWrite(value, super.passwordVisible, () {
+      super.passwordVisible = value;
+    });
+  }
+
   final _$_loginAsyncAction = AsyncAction('_LoginController._login');
 
   @override
@@ -176,6 +191,17 @@ mixin _$LoginController on _LoginController, Store {
   }
 
   @override
+  void setVisible() {
+    final _$actionInfo = _$_LoginControllerActionController.startAction(
+        name: '_LoginController.setVisible');
+    try {
+      return super.setVisible();
+    } finally {
+      _$_LoginControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 email: ${email},
@@ -183,6 +209,7 @@ user: ${user},
 password: ${password},
 loading: ${loading},
 error: ${error},
+passwordVisible: ${passwordVisible},
 validEmail: ${validEmail},
 validPassword: ${validPassword},
 pressedButton: ${pressedButton},
