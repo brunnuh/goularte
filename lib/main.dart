@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/base_controller.dart';
 import 'package:goularte/controllers/login_controller.dart';
@@ -8,6 +9,7 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize(debug: false);
   await initializeParse();
   setupLocators();
   runApp(MyApp());

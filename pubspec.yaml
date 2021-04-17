@@ -38,6 +38,10 @@ dependencies:
   url_launcher: ^5.7.10
   parse_server_sdk_flutter: ^2.1.0
   image_picker: 0.6.7+14
+  path_provider: ^1.6.28
+  #image_downloader: ^0.20.1
+  flutter_downloader: ^1.5.2
+  permission_handler: ^5.1.0+2
 
 dev_dependencies:
   flutter_test:

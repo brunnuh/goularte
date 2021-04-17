@@ -16,7 +16,6 @@ class _ArtViewState extends State<ArtView> {
     artController.getArts();
   }
 
-  @override
   ArtController artController = ArtController();
 
   @override

@@ -12,6 +12,9 @@ abstract class _ArtController with Store {
   @observable
   String erro;
 
+  @observable
+  bool loading = false;
+
   @action
   Future<void> getArts() async {
     arts.clear();
@@ -19,6 +22,18 @@ abstract class _ArtController with Store {
       final newArts = await ArtRepository().getArts();
       arts.addAll(newArts);
       erro = null;
+    } catch (e) {
+      erro = e;
+    }
+  }
+
+  @action
+  Future<void> downloadArt(String url, String name) async {
+    try {
+      erro = null;
+      loading = true;
+      await ArtRepository().downloadArt(url, name);
+      loading = false;
     } catch (e) {
       erro = e;
     }

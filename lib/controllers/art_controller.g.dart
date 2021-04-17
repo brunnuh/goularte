@@ -24,6 +24,21 @@ mixin _$ArtController on _ArtController, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_ArtController.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   final _$getArtsAsyncAction = AsyncAction('_ArtController.getArts');
 
   @override
@@ -31,10 +46,18 @@ mixin _$ArtController on _ArtController, Store {
     return _$getArtsAsyncAction.run(() => super.getArts());
   }
 
+  final _$downloadArtAsyncAction = AsyncAction('_ArtController.downloadArt');
+
+  @override
+  Future<void> downloadArt(String url, String name) {
+    return _$downloadArtAsyncAction.run(() => super.downloadArt(url, name));
+  }
+
   @override
   String toString() {
     return '''
-erro: ${erro}
+erro: ${erro},
+loading: ${loading}
     ''';
   }
 }
