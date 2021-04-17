@@ -29,11 +29,12 @@ class ArtRepository {
     }
   }
 
-  Future downloadArt(String url, String name) async {
+  Future<bool> downloadArt(String url, String name) async {
     try {
       final path = await getExternalStorageDirectory();
       await FlutterDownloader.enqueue(
           url: url, savedDir: path.path, fileName: name);
+      return true;
     } catch (e) {
       return Future.error('Falha ao fazer download da imagem');
     }

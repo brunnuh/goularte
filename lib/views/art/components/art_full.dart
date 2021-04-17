@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:goularte/controllers/art_controller.dart';
 import 'package:goularte/models/art.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:wallpaper_manager/wallpaper_manager.dart';
 
 class ArtFull extends StatelessWidget {
-  final Art art;
-  ArtFull(this.art);
-
   ArtController artController = ArtController();
+  final Art art;
+  ArtFull(this.art) {
+    artController.setExist(art.image.name);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +30,28 @@ class ArtFull extends StatelessWidget {
               }
             },
           ),
-          IconButton(
-            icon: Icon(Icons.panorama),
-            onPressed: () {},
-          )
+          Observer(builder: (_) {
+            return artController.exist
+                ? IconButton(
+                    icon: Icon(
+                      Icons.panorama,
+                    ),
+                    onPressed: () async {
+                      artController.setLoading(true);
+                      final int location = WallpaperManager.BOTH_SCREENS;
+                      var directory = await getExternalStorageDirectory();
+                      String path = directory.path + "/" + art.image.name;
+                      if (artController.exist) {
+                        await WallpaperManager.setWallpaperFromFile(
+                            path, location);
+                        await Future.delayed(Duration(seconds: 1));
+                      }
+
+                      artController.setLoading(false);
+                    },
+                  )
+                : Container();
+          })
         ],
       ),
       backgroundColor: Colors.black,

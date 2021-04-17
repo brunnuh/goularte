@@ -41,6 +41,7 @@ dependencies:
   path_provider: ^1.6.28
   #image_downloader: ^0.20.1
   flutter_downloader: ^1.5.2
+  wallpaper_manager: ^1.0.10
   permission_handler: ^5.1.0+2
 
 dev_dependencies:

@@ -39,6 +39,21 @@ mixin _$ArtController on _ArtController, Store {
     });
   }
 
+  final _$existAtom = Atom(name: '_ArtController.exist');
+
+  @override
+  bool get exist {
+    _$existAtom.reportRead();
+    return super.exist;
+  }
+
+  @override
+  set exist(bool value) {
+    _$existAtom.reportWrite(value, super.exist, () {
+      super.exist = value;
+    });
+  }
+
   final _$getArtsAsyncAction = AsyncAction('_ArtController.getArts');
 
   @override
@@ -53,11 +68,44 @@ mixin _$ArtController on _ArtController, Store {
     return _$downloadArtAsyncAction.run(() => super.downloadArt(url, name));
   }
 
+  final _$setExistAsyncAction = AsyncAction('_ArtController.setExist');
+
+  @override
+  Future<void> setExist(String name) {
+    return _$setExistAsyncAction.run(() => super.setExist(name));
+  }
+
+  final _$_ArtControllerActionController =
+      ActionController(name: '_ArtController');
+
+  @override
+  void setExistForced() {
+    final _$actionInfo = _$_ArtControllerActionController.startAction(
+        name: '_ArtController.setExistForced');
+    try {
+      return super.setExistForced();
+    } finally {
+      _$_ArtControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLoading(bool value) {
+    final _$actionInfo = _$_ArtControllerActionController.startAction(
+        name: '_ArtController.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$_ArtControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 erro: ${erro},
-loading: ${loading}
+loading: ${loading},
+exist: ${exist}
     ''';
   }
 }

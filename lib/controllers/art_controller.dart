@@ -1,6 +1,9 @@
+import 'dart:io' as io;
+
 import 'package:goularte/models/art.dart';
 import 'package:goularte/repositories/art_repository.dart';
 import 'package:mobx/mobx.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'art_controller.g.dart';
 
@@ -31,11 +34,32 @@ abstract class _ArtController with Store {
   Future<void> downloadArt(String url, String name) async {
     try {
       erro = null;
-      loading = true;
-      await ArtRepository().downloadArt(url, name);
-      loading = false;
+      setLoading(true);
+      await ArtRepository().downloadArt(url, name).then((value) async {
+        if (value) {
+          await setExistForced();
+        }
+      });
+
+      setLoading(false);
     } catch (e) {
       erro = e;
     }
   }
+
+  @observable
+  bool exist = false;
+
+  @action
+  Future<void> setExist(String name) async {
+    var directory = await getExternalStorageDirectory();
+    String path = directory.path + "/" + name;
+    exist = await io.File(await path).exists();
+  }
+
+  @action
+  void setExistForced() => exist = true;
+
+  @action
+  void setLoading(bool value) => loading = value;
 }
