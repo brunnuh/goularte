@@ -1,4 +1,4 @@
-import 'dart:io' as io;
+import 'dart:io';
 
 import 'package:goularte/models/art.dart';
 import 'package:goularte/repositories/art_repository.dart';
@@ -33,7 +33,7 @@ abstract class _ArtController with Store {
   @action
   Future<void> downloadArt(String url, String name) async {
     try {
-      erro = null;
+      setNullInErro();
       setLoading(true);
       await ArtRepository().downloadArt(url, name).then((value) async {
         if (value) {
@@ -54,7 +54,7 @@ abstract class _ArtController with Store {
   Future<void> setExist(String name) async {
     var directory = await getExternalStorageDirectory();
     String path = directory.path + "/" + name;
-    exist = await io.File(await path).exists();
+    exist = await File(await path).exists();
   }
 
   @action
@@ -62,4 +62,23 @@ abstract class _ArtController with Store {
 
   @action
   void setLoading(bool value) => loading = value;
+
+  @observable
+  bool loadingSave = false;
+
+  @action
+  Future<void> saveArt(File file) async {
+    try {
+      setNullInErro();
+      loadingSave = true;
+      await ArtRepository().postArt(file);
+      loadingSave = false;
+    } catch (e) {
+      erro = e;
+      loadingSave = false;
+    }
+  }
+
+  @action
+  void setNullInErro() => erro = null;
 }

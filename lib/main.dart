@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get_it/get_it.dart';
+import 'package:goularte/controllers/art_controller.dart';
 import 'package:goularte/controllers/base_controller.dart';
 import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/controllers/parse_controller.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
 void setupLocators() {
   GetIt.I.registerSingleton(LoginController());
   GetIt.I.registerSingleton(ParseController());
+  GetIt.I.registerSingleton(ArtController());
   GetIt.I.registerSingleton(BaseController());
 }
 

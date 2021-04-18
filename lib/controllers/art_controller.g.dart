@@ -54,6 +54,21 @@ mixin _$ArtController on _ArtController, Store {
     });
   }
 
+  final _$loadingSaveAtom = Atom(name: '_ArtController.loadingSave');
+
+  @override
+  bool get loadingSave {
+    _$loadingSaveAtom.reportRead();
+    return super.loadingSave;
+  }
+
+  @override
+  set loadingSave(bool value) {
+    _$loadingSaveAtom.reportWrite(value, super.loadingSave, () {
+      super.loadingSave = value;
+    });
+  }
+
   final _$getArtsAsyncAction = AsyncAction('_ArtController.getArts');
 
   @override
@@ -73,6 +88,13 @@ mixin _$ArtController on _ArtController, Store {
   @override
   Future<void> setExist(String name) {
     return _$setExistAsyncAction.run(() => super.setExist(name));
+  }
+
+  final _$saveArtAsyncAction = AsyncAction('_ArtController.saveArt');
+
+  @override
+  Future<void> saveArt(File file) {
+    return _$saveArtAsyncAction.run(() => super.saveArt(file));
   }
 
   final _$_ArtControllerActionController =
@@ -105,7 +127,8 @@ mixin _$ArtController on _ArtController, Store {
     return '''
 erro: ${erro},
 loading: ${loading},
-exist: ${exist}
+exist: ${exist},
+loadingSave: ${loadingSave}
     ''';
   }
 }

@@ -12,39 +12,38 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 25),
-              child: Text(
-                'Perfil',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
+        body: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 25),
+            child: Text(
+              'Perfil',
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
               ),
             ),
-            _loginController.user == null
-                ? Center(
-                    child: Login(),
-                  )
-                : TopInformation(),
-            const SizedBox(
-              height: 40,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Options(
-              loginController: _loginController,
-            )
-          ],
-        ),
+          ),
+          _loginController.user == null
+              ? Center(
+                  child: Login(),
+                )
+              : TopInformation(),
+          const SizedBox(
+            height: 40,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Options(
+            loginController: _loginController,
+          )
+        ],
       ),
-    );
+    ));
   }
 }

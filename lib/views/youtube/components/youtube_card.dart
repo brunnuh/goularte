@@ -78,7 +78,7 @@ class YoutubeCard extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      '${youtubeItem.description} de visualizações',
+                      '${youtubeItem.description}',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(

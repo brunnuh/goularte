@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:goularte/controllers/art_controller.dart';
 import 'package:goularte/controllers/base_controller.dart';
 import 'package:goularte/controllers/youtube_controller.dart';
 import 'package:goularte/views/art/art_view.dart';
@@ -24,6 +25,7 @@ class _BaseViewState extends State<BaseView> {
       : pageController = PageController(initialPage: page);
 
   final BaseController baseController = GetIt.I<BaseController>();
+  ArtController artController = GetIt.I<ArtController>();
 
   PageController pageController;
 
@@ -62,13 +64,37 @@ class _BaseViewState extends State<BaseView> {
             ),
             IdeasView(),
             ArtView(),
-            ProfileView(),
+            Observer(
+              builder: (_) {
+                return Stack(
+                  children: [
+                    ProfileView(),
+                    artController.loadingSave
+                        ? Container(
+                            color: Colors.black87,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : Container()
+                  ],
+                );
+              },
+            )
           ],
         ),
-        Positioned(
-          bottom: 0,
-          child: BottomBar(),
-        ),
+        Observer(
+          builder: (_) {
+            if (artController.loadingSave) {
+              return Container();
+            } else {
+              return Positioned(
+                bottom: 0,
+                child: BottomBar(),
+              );
+            }
+          },
+        )
       ],
     );
   }
