@@ -123,6 +123,17 @@ mixin _$ArtController on _ArtController, Store {
   }
 
   @override
+  void setNullInErro() {
+    final _$actionInfo = _$_ArtControllerActionController.startAction(
+        name: '_ArtController.setNullInErro');
+    try {
+      return super.setNullInErro();
+    } finally {
+      _$_ArtControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 erro: ${erro},

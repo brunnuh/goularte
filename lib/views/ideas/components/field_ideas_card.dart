@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:goularte/helpers/extensions.dart';
+import 'package:goularte/repositories/ideas_repository.dart';
 import 'package:line_icons/line_icons.dart';
 
 class FieldIdeasCard extends StatelessWidget {
-  final String name = 'Roberta Silva';
-  final String urlImage =
-      'https://pm1.narvii.com/6603/09dadef8df7a3417608a2b00599e1df2b078fc60_hq.jpg';
-  final String createdAt = '30/02/2020 20:30';
-  final String description =
-      'tesasa sasd asdas dasdasdsadasd asndnasdnqwnd wqn wnq qwdqwqd qwdqwdqw dqwd qdqw wqddwqdqwd qwdqwd qwdqw';
-  final int likes = 12;
+  final String name;
+  final String urlImage;
+  final DateTime createdAt;
+  final String description;
+  final int likes;
 
-  //FieldIdeasCard({@required this.name, @required this.urlImage, @required this.createdAt, @required this.likes});
+  FieldIdeasCard({
+    @required this.name,
+    @required this.description,
+    @required this.likes,
+    @required this.createdAt,
+    @required this.urlImage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +48,21 @@ class FieldIdeasCard extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
-                        description,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 3),
+                        child: Text(
+                          description,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                       Text(
-                        createdAt,
+                        createdAt.formattedDate(),
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey[600],
@@ -63,19 +73,24 @@ class FieldIdeasCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      margin: const EdgeInsets.only(top: 1),
-                      child: Text(
-                        likes.toString(),
-                      )),
-                  Icon(
-                    LineIcons.thumbsUp,
-                    size: 24,
-                  ),
-                ],
+              GestureDetector(
+                onTap: () async {
+                  await IdeasRepository().getAllIdeas();
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(top: 1),
+                        child: Text(
+                          likes.toString(),
+                        )),
+                    Icon(
+                      LineIcons.thumbsUp,
+                      size: 24,
+                    ),
+                  ],
+                ),
               )
             ],
           ),

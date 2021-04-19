@@ -17,7 +17,8 @@ class CardIdeas extends StatelessWidget {
       width: 300,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        color: Color(0xffD55759),
+        //color: Color(0xffD55759),
+        color: Colors.purple.shade300,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Row(
@@ -72,7 +73,7 @@ class CardIdeas extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.lobster(
                       fontWeight: FontWeight.w100,
-                      fontSize: 16,
+                      fontSize: 15,
                       color: Colors.white,
                     ),
                   ),

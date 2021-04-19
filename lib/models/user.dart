@@ -17,4 +17,9 @@ class User {
       photo: parseUser.get<ParseFile>(keyUserPhoto)?.url,
     );
   }
+
+  @override
+  String toString() {
+    return 'User{name: $name, email: $email, password: $password, photo: $photo}';
+  }
 }

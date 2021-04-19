@@ -5,3 +5,12 @@ const keyCreatedAt = 'createdAt';
 const keyArtUser = 'User';
 const keyArtImage = 'image';
 const keyArtAccepted = 'accepted';
+
+// ideas
+
+const keyIdeas = 'ideas';
+const keyIdeasCreatedAt = 'createdAt';
+const keyIdeasDescription = 'description';
+const keyIdeasUser = 'user';
+const keyIdeasAccepted = 'accepted';
+const keyIdeasLikes = 'likes';
