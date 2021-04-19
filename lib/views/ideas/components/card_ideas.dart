@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:goularte/models/user.dart';
 import 'package:line_icons/line_icons.dart';
 
 class CardIdeas extends StatelessWidget {
-  final String description =
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-
+  final String description;
+  final User user;
   final int position;
 
-  CardIdeas({@required this.position});
+  CardIdeas({@required this.position, @required this.description, this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,7 @@ class CardIdeas extends StatelessWidget {
                         margin: EdgeInsets.only(bottom: 10),
                         child: CircleAvatar(
                           radius: 35,
-                          backgroundImage: NetworkImage(
-                            'https://pm1.narvii.com/6603/09dadef8df7a3417608a2b00599e1df2b078fc60_hq.jpg',
-                          ),
+                          backgroundImage: NetworkImage(user.photo),
                         ),
                       ),
                       Positioned(
@@ -55,7 +53,7 @@ class CardIdeas extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    'Roberta Silva',
+                    user.name,
                     style: GoogleFonts.lobster(
                       fontSize: 16,
                       color: Colors.white,

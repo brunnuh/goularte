@@ -10,7 +10,7 @@ class IdeasRepository {
 
     //regras
     query.whereEqualTo(keyIdeasAccepted, true);
-    query.orderByDescending(keyIdeasLikes);
+    //query.orderByDescending(keyIdeasLikes);
     query.includeObject([keyIdeasUser]);
     //query.setLimit(20);
 
@@ -25,6 +25,31 @@ class IdeasRepository {
       return ideas;
     } catch (e) {
       return Future.error("Falha ao buscar lista de ideias");
+    }
+  }
+
+  Future<List<Ideas>> getTopIdeas() async {
+    List<Ideas> ideas = [];
+    final query = QueryBuilder(ParseObject(keyIdeas));
+
+    //regras
+    query.whereEqualTo(keyIdeasAccepted, true);
+    query.orderByDescending(keyIdeasCreatedAt);
+    query.includeObject([keyIdeasUser]);
+    query.setLimit(3);
+
+    try {
+      var response = await query.query();
+      if (response.success) {
+        response.results.forEach((i) {
+          Ideas idea = Ideas.fromParse(i);
+          ideas.add(idea);
+        });
+      }
+
+      return ideas;
+    } catch (e) {
+      return Future.error("Falha ao buscar top ideias");
     }
   }
 }

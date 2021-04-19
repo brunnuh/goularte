@@ -24,6 +24,29 @@ mixin _$IdeasController on _IdeasController, Store {
     });
   }
 
+  final _$loadingAllAtom = Atom(name: '_IdeasController.loadingAll');
+
+  @override
+  bool get loadingAll {
+    _$loadingAllAtom.reportRead();
+    return super.loadingAll;
+  }
+
+  @override
+  set loadingAll(bool value) {
+    _$loadingAllAtom.reportWrite(value, super.loadingAll, () {
+      super.loadingAll = value;
+    });
+  }
+
+  final _$getAllWithTopAsyncAction =
+      AsyncAction('_IdeasController.getAllWithTop');
+
+  @override
+  Future<void> getAllWithTop() {
+    return _$getAllWithTopAsyncAction.run(() => super.getAllWithTop());
+  }
+
   final _$getAllIdeasAsyncAction = AsyncAction('_IdeasController.getAllIdeas');
 
   @override
@@ -31,10 +54,18 @@ mixin _$IdeasController on _IdeasController, Store {
     return _$getAllIdeasAsyncAction.run(() => super.getAllIdeas());
   }
 
+  final _$getTopIdeasAsyncAction = AsyncAction('_IdeasController.getTopIdeas');
+
+  @override
+  Future<void> getTopIdeas() {
+    return _$getTopIdeasAsyncAction.run(() => super.getTopIdeas());
+  }
+
   @override
   String toString() {
     return '''
-erro: ${erro}
+erro: ${erro},
+loadingAll: ${loadingAll}
     ''';
   }
 }

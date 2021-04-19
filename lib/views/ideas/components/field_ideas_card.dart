@@ -75,7 +75,7 @@ class FieldIdeasCard extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
-                  await IdeasRepository().getAllIdeas();
+                  await IdeasRepository().getTopIdeas();
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

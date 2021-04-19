@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -32,21 +33,44 @@ class IdeasView extends StatelessWidget {
               ),
             ),
             Observer(
-              builder: (_) => ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: ideasController.ideasList.length,
-                itemBuilder: (_, index) {
-                  Ideas idea = ideasController.ideasList[index];
-                  return FieldIdeasCard(
-                    name: idea.user.name,
-                    description: idea.description,
-                    likes: idea.likes,
-                    createdAt: idea.createdAt,
-                    urlImage: idea.user.photo,
+              builder: (context) {
+                if (!ideasController.loadingAll) {
+                  if (ideasController.ideasList == null ||
+                      ideasController.ideasList.isEmpty) {
+                    return Center(
+                      child: Text(""),
+                    );
+                  } else {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: ideasController.ideasList.length,
+                      itemBuilder: (_, index) {
+                        Ideas idea = ideasController.ideasList[index];
+                        return FieldIdeasCard(
+                          name: idea.user.name,
+                          description: idea.description,
+                          likes: idea.likes,
+                          createdAt: idea.createdAt,
+                          urlImage: idea.user.photo,
+                        );
+                      },
+                    );
+                  }
+                } else {
+                  return Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.width * 0.4),
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Theme.of(context).appBarTheme.color,
+                      ),
+                      backgroundColor: Colors.white,
+                    )),
                   );
-                },
-              ),
+                }
+              },
             ),
             const SizedBox(
               height: 35,
