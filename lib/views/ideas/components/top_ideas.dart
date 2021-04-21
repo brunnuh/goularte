@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/ideas_controller.dart';
+import 'package:goularte/views/ideas/ideas_details.dart';
 
 import 'card_ideas.dart';
 
@@ -57,20 +58,44 @@ class TopIdeas extends StatelessWidget {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    CardIdeas(
-                      position: 1,
-                      description: ideasController.topIdeas[0].description,
-                      user: ideasController.topIdeas[0].user,
+                    GestureDetector(
+                      child: CardIdeas(
+                        position: 1,
+                        description: ideasController.topIdeas[0].description,
+                        user: ideasController.topIdeas[0].user,
+                      ),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              IdeasDetails(idea: ideasController.topIdeas[0]),
+                        ),
+                      ),
                     ),
-                    CardIdeas(
-                      position: 2,
-                      description: ideasController.topIdeas[1].description,
-                      user: ideasController.topIdeas[1].user,
+                    GestureDetector(
+                      child: CardIdeas(
+                        position: 2,
+                        description: ideasController.topIdeas[1].description,
+                        user: ideasController.topIdeas[1].user,
+                      ),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              IdeasDetails(idea: ideasController.topIdeas[1]),
+                        ),
+                      ),
                     ),
-                    CardIdeas(
-                      position: 3,
-                      description: ideasController.topIdeas[1].description,
-                      user: ideasController.topIdeas[1].user,
+                    GestureDetector(
+                      child: CardIdeas(
+                        position: 3,
+                        description: ideasController.topIdeas[2].description,
+                        user: ideasController.topIdeas[2].user,
+                      ),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              IdeasDetails(idea: ideasController.topIdeas[2]),
+                        ),
+                      ),
                     ),
                   ],
                 ),

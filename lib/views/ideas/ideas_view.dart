@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/ideas_controller.dart';
 import 'package:goularte/models/ideas.dart';
+import 'package:goularte/views/ideas/ideas_details.dart';
 
 import 'components/field_ideas_card.dart';
 import 'components/top_ideas.dart';
@@ -48,11 +49,10 @@ class IdeasView extends StatelessWidget {
                       itemBuilder: (_, index) {
                         Ideas idea = ideasController.ideasList[index];
                         return FieldIdeasCard(
-                          name: idea.user.name,
-                          description: idea.description,
-                          likes: idea.likes,
-                          createdAt: idea.createdAt,
-                          urlImage: idea.user.photo,
+                          ideas: idea,
+                          openIdea: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => IdeasDetails(idea: idea))),
                         );
                       },
                     );

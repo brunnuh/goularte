@@ -74,22 +74,34 @@ class TopInformation extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Text(
-          loginController.user.name,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 24,
-          ),
-        ),
-        Text(
-          loginController.user.email,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.w300,
-            fontSize: 15,
-          ),
-        ),
+        Observer(builder: (_) {
+          if (loginController.user != null &&
+              loginController.user.name != null &&
+              loginController.user.email != null) {
+            return Column(
+              children: [
+                Text(
+                  loginController.user.name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 24,
+                  ),
+                ),
+                Text(
+                  loginController.user.email,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return Container();
+          }
+        })
       ],
     );
   }

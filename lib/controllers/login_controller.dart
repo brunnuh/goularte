@@ -51,9 +51,9 @@ abstract class _LoginController with Store {
 
   @action
   void clearFields() {
-    email = null;
-    password = null;
-    user = User();
+    //email = null;
+    //password = null;
+    user = null;
   }
 
   @computed

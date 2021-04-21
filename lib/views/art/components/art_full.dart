@@ -78,10 +78,13 @@ class ArtFull extends StatelessWidget {
                   return Stack(
                     alignment: Alignment.center,
                     children: [
-                      Card(
+                      Container(
+                        height: 400,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
                         child: CachedNetworkImage(
                           imageUrl: art.image.url,
-                          fit: BoxFit.fitWidth,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       artController.loading

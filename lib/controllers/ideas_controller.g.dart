@@ -61,6 +61,27 @@ mixin _$IdeasController on _IdeasController, Store {
     return _$getTopIdeasAsyncAction.run(() => super.getTopIdeas());
   }
 
+  final _$likeIdeaAsyncAction = AsyncAction('_IdeasController.likeIdea');
+
+  @override
+  Future<void> likeIdea(Ideas idea) {
+    return _$likeIdeaAsyncAction.run(() => super.likeIdea(idea));
+  }
+
+  final _$_IdeasControllerActionController =
+      ActionController(name: '_IdeasController');
+
+  @override
+  void forcedNull() {
+    final _$actionInfo = _$_IdeasControllerActionController.startAction(
+        name: '_IdeasController.forcedNull');
+    try {
+      return super.forcedNull();
+    } finally {
+      _$_IdeasControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

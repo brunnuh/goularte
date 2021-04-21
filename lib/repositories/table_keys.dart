@@ -14,3 +14,5 @@ const keyIdeasDescription = 'description';
 const keyIdeasUser = 'user';
 const keyIdeasAccepted = 'accepted';
 const keyIdeasLikes = 'likes';
+const keyIdeasId = "objectId";
+const keyIdeasAlready_voted = "already_voted";

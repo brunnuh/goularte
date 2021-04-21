@@ -102,7 +102,7 @@ class LoginView extends StatelessWidget {
                         ),
                         isDense: true,
                       ),
-                      obscureText: loginController.passwordVisible,
+                      obscureText: !loginController.passwordVisible,
                     );
                   },
                 ),

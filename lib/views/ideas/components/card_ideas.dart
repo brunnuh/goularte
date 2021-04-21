@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:goularte/models/user.dart';
@@ -29,12 +30,14 @@ class CardIdeas extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
-                        height: 90,
+                        height: 80,
+                        clipBehavior: Clip.antiAlias,
                         alignment: Alignment.bottomCenter,
-                        margin: EdgeInsets.only(bottom: 10),
-                        child: CircleAvatar(
-                          radius: 35,
-                          backgroundImage: NetworkImage(user.photo),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(60)),
+                        margin: EdgeInsets.only(bottom: 1, top: 16),
+                        child: CachedNetworkImage(
+                          imageUrl: user.photo,
                         ),
                       ),
                       Positioned(

@@ -71,4 +71,26 @@ abstract class _IdeasController with Store {
       erro = e;
     }
   }
+
+  @action
+  Future<void> likeIdea(Ideas idea) async {
+    try {
+      loadingAll = true;
+      //erro = null;
+      List updateIdea = await IdeasRepository().likeIdea(idea);
+      print(updateIdea);
+      ideasList.remove(idea);
+      idea.likes = updateIdea.last;
+      idea.already_voted = updateIdea.first;
+      print(updateIdea.toString());
+      ideasList.add(idea);
+      loadingAll = false;
+    } catch (e) {
+      loadingAll = false;
+      erro = e;
+    }
+  }
+
+  @action
+  void forcedNull() => erro = null;
 }
