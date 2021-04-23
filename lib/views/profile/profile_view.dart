@@ -37,14 +37,9 @@ class ProfileView extends StatelessWidget {
                 : TopInformation(),
           ),
           const SizedBox(
-            height: 40,
+            height: 30,
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          Options(
-              //loginController: _loginController,
-              )
+          Options(),
         ],
       ),
     ));

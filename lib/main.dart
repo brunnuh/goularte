@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/art_controller.dart';
 import 'package:goularte/controllers/base_controller.dart';
+import 'package:goularte/controllers/info_app_controller.dart';
 import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/controllers/parse_controller.dart';
 import 'package:goularte/views/base/base_view.dart';
@@ -52,6 +53,7 @@ void setupLocators() {
   GetIt.I.registerSingleton(ArtController());
   GetIt.I.registerSingleton(BaseController());
   GetIt.I.registerSingleton(IdeasController());
+  GetIt.I.registerSingleton(InfoAppController());
 }
 
 Future<void> initializeParse() async {
