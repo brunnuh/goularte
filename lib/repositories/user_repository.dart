@@ -8,7 +8,11 @@ import 'package:path/path.dart' as path;
 
 class UserRepository {
   Future login(User user) async {
-    final parseUser = ParseUser(user.email, user.password, user.email);
+    final parseUser = ParseUser(
+      user.email,
+      user.password,
+      user.email,
+    );
     final response = await parseUser.login();
 
     if (response.success) {
