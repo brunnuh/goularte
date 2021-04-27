@@ -5,32 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/art_controller.dart';
+import 'package:goularte/views/globals/alert_widget.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:line_icons/line_icons.dart';
+
+import 'fields_ideas.dart';
 
 class Send extends StatelessWidget {
   ArtController artController = GetIt.I<ArtController>();
-
-  Widget alert(String text, BuildContext context) {
-    return AlertDialog(
-      title: Wrap(
-        children: [
-          Text(
-            text,
-            style: TextStyle(),
-          )
-        ],
-      ),
-      actions: [
-        FlatButton(
-          onPressed: () {
-            artController.setNullInErro();
-            Navigator.of(context).pop();
-          },
-          child: Text("Ok"),
-        )
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,19 +49,48 @@ class Send extends StatelessWidget {
                                   return showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return alert(artController.erro, context);
+                                      return AlertWidget(
+                                        content: artController.erro,
+                                        icon: Icon(
+                                          LineIcons.exclamationCircle,
+                                          size: 50,
+                                        ),
+                                        actions: [
+                                          FlatButton(
+                                            onPressed: () {
+                                              artController.setNullInErro();
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text("Ok"),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return showDialog(
+                                    context: context,
+                                    builder: (_) {
+                                      return AlertWidget(
+                                          content:
+                                              'Imagem enviada.\nAguarde ela ser analizada.',
+                                          icon: Icon(
+                                            LineIcons.check,
+                                            size: 50,
+                                            color: Colors.green,
+                                          ),
+                                          actions: [
+                                            FlatButton(
+                                              onPressed: () {
+                                                artController.setNullInErro();
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text("Ok"),
+                                            )
+                                          ]);
                                     },
                                   );
                                 }
-                              } else {
-                                return showDialog(
-                                  context: context,
-                                  builder: (_) {
-                                    return alert(
-                                        'Imagem enviada.\nAguarde ela ser analizada.',
-                                        context);
-                                  },
-                                );
                               }
                             },
                             child: ListTile(
@@ -98,12 +109,18 @@ class Send extends StatelessWidget {
                               color: Colors.black87,
                             ),
                           ),
-                          ListTile(
-                            title: Text("Ideias"),
-                            subtitle: Text(
-                              "Compartilhe suas ideias para video, quem sabe o Gou não veja.",
-                              style: TextStyle(
-                                fontSize: 12,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => FieldsIdeas()));
+                            },
+                            child: ListTile(
+                              title: Text("Ideias"),
+                              subtitle: Text(
+                                "Compartilhe suas ideias para video, quem sabe o Gou não veja.",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                           )

@@ -78,11 +78,9 @@ abstract class _IdeasController with Store {
       loadingAll = true;
       //erro = null;
       List updateIdea = await IdeasRepository().likeIdea(idea);
-      print(updateIdea);
       ideasList.remove(idea);
       idea.likes = updateIdea.last;
       idea.already_voted = updateIdea.first;
-      print(updateIdea.toString());
       ideasList.add(idea);
       loadingAll = false;
     } catch (e) {
@@ -91,6 +89,52 @@ abstract class _IdeasController with Store {
     }
   }
 
+  @observable
+  String description;
+
+  @observable
+  bool response;
+
+  int length = 250;
+
   @action
-  void forcedNull() => erro = null;
+  void setDescription(String value) => description = value;
+
+  @action
+  Future<void> postIdea() async {
+    try {
+      loadingAll = true;
+      response = await IdeasRepository().postIdea(description);
+      loadingAll = false;
+    } catch (e) {
+      loadingAll = false;
+      erro = e;
+    }
+  }
+
+  @action
+  void clearFields() {
+    erro = null;
+    response = null;
+    description = null;
+  }
+
+  @computed
+  bool get validField =>
+      description != null && description != "" && description.length > length;
+  bool get onButton =>
+      description != null &&
+      description.isNotEmpty &&
+      description != "" &&
+      description.replaceAll(" ", "") != "" &&
+      description.length <= length;
+
+  @computed
+  String get erroField {
+    if (validField) {
+      return "Texto muito grande";
+    } else if (description != null && description.isEmpty) {
+      return "Digite algo";
+    }
+  }
 }

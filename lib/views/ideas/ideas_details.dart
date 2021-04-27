@@ -6,6 +6,9 @@ import 'package:goularte/controllers/ideas_controller.dart';
 import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/helpers/extensions.dart';
 import 'package:goularte/models/ideas.dart';
+import 'package:goularte/views/globals/alert_widget.dart';
+import 'package:goularte/views/globals/loading.dart';
+import 'package:line_icons/line_icons.dart';
 
 class IdeasDetails extends StatelessWidget {
   final Ideas idea;
@@ -51,21 +54,22 @@ class IdeasDetails extends StatelessWidget {
                     return showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDialog(
-                          title: Text(
-                            ideaController.erro,
-                            textAlign: TextAlign.center,
-                          ),
-                          actions: [
-                            FlatButton(
-                              onPressed: () {
-                                ideaController.forcedNull();
-                                Navigator.of(context).pop();
-                              },
-                              child: Text("ok"),
-                            )
-                          ],
-                        );
+                        return AlertWidget(
+                            content: ideaController.erro,
+                            icon: Icon(
+                              LineIcons.exclamationCircle,
+                              size: 50,
+                              color: Colors.redAccent,
+                            ),
+                            actions: [
+                              FlatButton(
+                                onPressed: () {
+                                  ideaController.clearFields();
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("ok"),
+                              )
+                            ]);
                       },
                     );
                   }
@@ -165,16 +169,7 @@ class IdeasDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              ideaController.loadingAll
-                  ? Container(
-                      color: Colors.black54,
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : Container()
+              ideaController.loadingAll ? Loading() : Container()
             ],
           );
         },

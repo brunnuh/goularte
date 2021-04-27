@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/info_app_controller.dart';
 import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/repositories/user_repository.dart';
+import 'package:goularte/views/globals/alert_widget.dart';
 import 'package:goularte/views/help_maintain/help_maintain_view.dart';
 import 'package:goularte/views/options/options_view.dart';
 import 'package:goularte/views/profile/components/send.dart';
@@ -47,8 +48,13 @@ class Options extends StatelessWidget {
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text("Quer concluir essa ação?"),
+          return AlertWidget(
+            content: "Quer concluir essa ação?",
+            icon: Icon(
+              LineIcons.question,
+              size: 50,
+              color: Colors.redAccent,
+            ),
             actions: [
               FlatButton(
                 onPressed: () async {

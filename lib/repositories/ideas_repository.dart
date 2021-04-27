@@ -3,6 +3,24 @@ import 'package:goularte/repositories/table_keys.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class IdeasRepository {
+  Future postIdea(String description) async {
+    ParseUser parseUser = await ParseUser.currentUser();
+    final parseObject = ParseObject(keyIdeas);
+
+    parseObject.set<String>(keyIdeasDescription, description);
+    parseObject.set<ParseUser>(keyIdeasUser, parseUser);
+
+    try {
+      final response = await parseObject.save();
+      if (response.success) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return Future.error("Falha ao enviar, por favor, tente mais tarde.");
+    }
+  }
+
   Future<List<Ideas>> getAllIdeas() async {
     List<Ideas> ideas = [];
 
@@ -10,7 +28,7 @@ class IdeasRepository {
 
     //regras
 
-    query.whereEqualTo(keyIdeasAccepted, true);
+    //query.whereEqualTo(keyIdeasAccepted, true);
     query.orderByDescending(keyIdeasCreatedAt);
     query.includeObject([keyIdeasUser]);
     //query.setLimit(1);
@@ -34,7 +52,7 @@ class IdeasRepository {
     final query = QueryBuilder(ParseObject(keyIdeas));
 
     //regras
-    query.whereEqualTo(keyIdeasAccepted, true);
+    //query.whereEqualTo(keyIdeasAccepted, true);
     query.orderByDescending(keyIdeasLikes);
     query.includeObject([keyIdeasUser, keyIdeasAlready_voted]);
     query.setLimit(3);

@@ -7,7 +7,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/controllers/parse_controller.dart';
+import 'package:goularte/views/globals/alert_widget.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:line_icons/line_icons.dart';
 
 class TopInformation extends StatelessWidget {
   LoginController loginController = GetIt.I<LoginController>();
@@ -25,10 +27,15 @@ class TopInformation extends StatelessWidget {
               showCupertinoDialog(
                 context: context,
                 builder: (context) {
-                  return CupertinoAlertDialog(
-                    title: Text(loginController.user.photo == null
+                  return AlertWidget(
+                    content: loginController.user.photo == null
                         ? "Adicionar uma foto de perfil?"
-                        : "Substituir foto de perfil?"),
+                        : "Substituir foto de perfil?",
+                    icon: Icon(
+                      LineIcons.question,
+                      size: 50,
+                      color: Colors.green,
+                    ),
                     actions: [
                       FlatButton(
                         onPressed: () async {
