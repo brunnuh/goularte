@@ -74,10 +74,11 @@ abstract class _LoginController with Store {
   String error;
 
   @computed
-  bool get pressedButton => validEmail && validPassword;
+  bool get pressedButton => validEmail && validPassword && !loading;
 
   @computed
-  Function get isValidForm => validEmail && validPassword ? _login : null;
+  Function get isValidForm =>
+      validEmail && validPassword && !loading ? _login : null;
 
   @action
   Future<void> _login() async {
@@ -86,6 +87,7 @@ abstract class _LoginController with Store {
       error = null;
       user =
           await UserRepository().login(User(email: email, password: password));
+
       if (user != null) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(

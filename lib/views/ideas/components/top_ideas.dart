@@ -24,7 +24,7 @@ class TopIdeas extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            IconButton(
+            /*IconButton(
               icon: Icon(
                 Icons.update,
                 size: 27,
@@ -32,14 +32,13 @@ class TopIdeas extends StatelessWidget {
               onPressed: () async {
                 await ideasController.getAllIdeas();
               },
-            )
+            )*/ /// desabilitado para não ultrapassar o limite do parse
           ],
         ),
         const SizedBox(
           height: 10,
         ),
         Observer(builder: (_) {
-          print(ideasController.topIdeas);
           if (!ideasController.loadingTop) {
             if (ideasController.topIdeas.isEmpty ||
                 ideasController.topIdeas == null) {
@@ -63,6 +62,7 @@ class TopIdeas extends StatelessWidget {
                         position: 1,
                         description: ideasController.topIdeas[0].description,
                         user: ideasController.topIdeas[0].user,
+                        assetImage: "assets/medal-gold.png",
                       ),
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -76,6 +76,7 @@ class TopIdeas extends StatelessWidget {
                         position: 2,
                         description: ideasController.topIdeas[1].description,
                         user: ideasController.topIdeas[1].user,
+                        assetImage: "assets/medal-silver.png",
                       ),
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -89,6 +90,7 @@ class TopIdeas extends StatelessWidget {
                         position: 3,
                         description: ideasController.topIdeas[2].description,
                         user: ideasController.topIdeas[2].user,
+                        assetImage: "assets/medal-bronze.png",
                       ),
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(

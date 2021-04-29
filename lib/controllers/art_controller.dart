@@ -10,6 +10,10 @@ part 'art_controller.g.dart';
 class ArtController = _ArtController with _$ArtController;
 
 abstract class _ArtController with Store {
+  _ArtController() {
+    getArts();
+  }
+
   ObservableList<Art> arts = ObservableList<Art>();
 
   @observable

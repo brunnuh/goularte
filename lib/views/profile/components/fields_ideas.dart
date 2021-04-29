@@ -79,7 +79,6 @@ class FieldsIdeas extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: Observer(
                             builder: (_) {
-                              print(ideasController.onButton);
                               return RaisedButton(
                                 child: Text(
                                   "Enviar",

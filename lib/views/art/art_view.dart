@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/art_controller.dart';
 import 'package:goularte/views/art/components/art_block.dart';
 
@@ -13,10 +14,11 @@ class _ArtViewState extends State<ArtView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    artController.getArts();
+    //artController.getArts();
+    // pega as artes toda vez que é chamado, mas foi desativado pois o servidor vai cobrar caso aja muitas requisicoes
   }
 
-  ArtController artController = ArtController();
+  ArtController artController = GetIt.I<ArtController>();
 
   @override
   Widget build(BuildContext context) {

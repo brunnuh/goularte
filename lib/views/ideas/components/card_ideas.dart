@@ -1,15 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:goularte/models/user.dart';
-import 'package:line_icons/line_icons.dart';
 
 class CardIdeas extends StatelessWidget {
   final String description;
   final User user;
   final int position;
+  final String assetImage;
 
-  CardIdeas({@required this.position, @required this.description, this.user});
+  CardIdeas(
+      {@required this.position,
+      @required this.description,
+      this.user,
+      @required this.assetImage});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +23,8 @@ class CardIdeas extends StatelessWidget {
       width: 300,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        //color: Color(0xffD55759),
-        color: Colors.purple.shade300,
+        color: Color(0xff7f2982),
+        //color: Theme.of(context).appBarTheme.color,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Row(
@@ -41,25 +46,21 @@ class CardIdeas extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        top: -4,
-                        right: 14,
-                        child: Icon(
-                          LineIcons.crown,
-                          size: 40,
-                          color: position == 1
-                              ? Colors.orangeAccent
-                              : position == 2
-                                  ? Color(0xffDBDAD8)
-                                  : Color(0xff99675E),
+                        bottom: 0,
+                        left: 20,
+                        child: Image.asset(
+                          this.assetImage,
+                          width: 100,
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Text(
                     user.name,
-                    style: GoogleFonts.lobster(
+                    style: GoogleFonts.abrilFatface(
                       fontSize: 16,
-                      color: Colors.white,
+                      fontWeight: FontWeight.w200,
+                      color: Color(0xffedf2f4),
                     ),
                   )
                 ],
@@ -72,8 +73,8 @@ class CardIdeas extends StatelessWidget {
                     maxLines: 5,
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.lobster(
-                      fontWeight: FontWeight.w100,
+                    style: GoogleFonts.abrilFatface(
+                      fontWeight: FontWeight.w200,
                       fontSize: 15,
                       color: Colors.white,
                     ),
