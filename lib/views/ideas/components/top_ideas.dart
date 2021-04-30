@@ -30,9 +30,12 @@ class TopIdeas extends StatelessWidget {
                 size: 27,
               ),
               onPressed: () async {
-                await ideasController.getAllIdeas();
+                //await ideasController.getAllIdeas();
+               //await ideasController.getNextPage();
               },
-            )*/ /// desabilitado para não ultrapassar o limite do parse
+            )*/
+
+            /// desabilitado para não ultrapassar o limite do parse
           ],
         ),
         const SizedBox(

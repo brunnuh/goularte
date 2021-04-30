@@ -10,6 +10,7 @@ import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/controllers/parse_controller.dart';
 import 'package:goularte/controllers/splash_controller.dart';
 import 'package:goularte/views/splash/splash_view.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 void main() async {
@@ -25,6 +26,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // inicia o one signal
+    OneSignal.shared.init("000939ed-4c49-42b9-906d-c03324223e10");
+
+    OneSignal.shared
+        .setInFocusDisplayType(OSNotificationDisplayType.notification);
+
     return MaterialApp(
       title: 'goularte app',
       theme: ThemeData(
@@ -49,11 +56,12 @@ class MyApp extends StatelessWidget {
 }
 
 void setupLocators() {
+  GetIt.I.registerSingleton(IdeasController());
   GetIt.I.registerSingleton(LoginController());
   GetIt.I.registerSingleton(ParseController());
   GetIt.I.registerSingleton(ArtController());
   GetIt.I.registerSingleton(BaseController());
-  GetIt.I.registerSingleton(IdeasController());
+
   GetIt.I.registerSingleton(InfoAppController());
   GetIt.I.registerSingleton(SplashController());
 }

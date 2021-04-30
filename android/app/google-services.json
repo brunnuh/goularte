@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1059568250806",
+    "project_id": "goularte-app",
+    "storage_bucket": "goularte-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059568250806:android:5941078d50e2a73e06db17",
+        "android_client_info": {
+          "package_name": "bs.com.bruno.goularte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059568250806-7vq8ba9ju73qkhsphfsls0hkajdsk0hg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bs.com.bruno.goularte",
+            "certificate_hash": "df639c24fdb5b3cb6b17400a18b711e036188a08"
+          }
+        },
+        {
+          "client_id": "1059568250806-r7dpfn2evc0un3hv5opm2tjah0uovl23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBATXeDZ5ARfqk7_gtM_yL-q9PVRcekP5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059568250806-r7dpfn2evc0un3hv5opm2tjah0uovl23.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

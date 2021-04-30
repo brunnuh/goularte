@@ -38,7 +38,13 @@ class IdeasDetails extends StatelessWidget {
             if (ideaController.loadingAll) {
               // se loading estiver ativado
               return Center(
-                child: CircularProgressIndicator(),
+                child: Container(
+                    width: 15,
+                    height: 15,
+                    margin: EdgeInsets.only(right: 10),
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(Colors.white),
+                    )),
               );
             } else if (loginController.user == null) {
               // se nao estiver logado

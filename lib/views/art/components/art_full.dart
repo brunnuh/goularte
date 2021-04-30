@@ -55,57 +55,63 @@ class ArtFull extends StatelessWidget {
         ],
       ),
       backgroundColor: Colors.black,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Enviado por ${art.user.name}",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w400,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 40,
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: Hero(
-              tag: art.image.url.toString(),
-              child: Observer(
-                builder: (_) {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        height: 400,
-                        width: MediaQuery.of(context).size.width,
-                        color: Colors.white,
-                        child: CachedNetworkImage(
-                          imageUrl: art.image.url,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      artController.loading
-                          ? Container(
-                              color: Colors.black87,
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height,
-                              child: Center(
-                                  child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(
-                                    Theme.of(context).appBarTheme.color),
-                              )),
-                            )
-                          : Container()
-                    ],
-                  );
-                },
+            Text(
+              "Enviado por ${art.user.name}",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w400,
               ),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: Hero(
+                tag: art.image.url.toString(),
+                child: Observer(
+                  builder: (_) {
+                    return Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          height: 400,
+                          width: MediaQuery.of(context).size.width,
+                          color: Colors.white,
+                          child: CachedNetworkImage(
+                            imageUrl: art.image.url,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        artController.loading
+                            ? Container(
+                                color: Colors.black87,
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.height,
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation(
+                                      Theme.of(context).appBarTheme.color),
+                                )),
+                              )
+                            : Container()
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

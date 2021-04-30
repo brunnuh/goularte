@@ -8,9 +8,20 @@ class IdeasController = _IdeasController with _$IdeasController;
 
 abstract class _IdeasController with Store {
   _IdeasController() {
-    getAllWithTop();
+    getTopIdeas();
+    autorun((_) async {
+      if (nextPage == 0) {
+        loadingAll = true;
+      }
+      try {
+        List<Ideas> newIdeas = await IdeasRepository().getIdeas(nextPage);
+        addNewsIdeas(newIdeas);
+      } catch (e) {
+        lastPage = true;
+      }
+      loadingAll = false;
+    });
   }
-
   ObservableList<Ideas> ideasList = ObservableList<Ideas>();
 
   @observable
@@ -20,51 +31,40 @@ abstract class _IdeasController with Store {
   bool loadingAll = false;
   bool loadingTop = false;
 
+  // é usado para delimitar a paginacao
+  @observable
+  int nextPage = 0;
+
   ObservableList<Ideas> topIdeas = ObservableList<Ideas>();
 
   @action
-  Future<void> getAllWithTop() async {
+  Future<void> getTopIdeas() async {
     try {
-      loadingAll = true;
       loadingTop = true;
-      erro = null;
-      // lista de todas as ideias
-      ideasList.clear();
-      List<Ideas> ideas = await IdeasRepository().getAllIdeas();
-      ideasList.addAll(ideas);
-      loadingAll = false;
-
-      // top 3 mais curtidas
-      await getTopIdeas();
+      topIdeas.clear();
+      List<Ideas> ideas = await IdeasRepository().getTopIdeas();
+      topIdeas.addAll(ideas);
+      loadingTop = false;
     } catch (e) {
       loadingTop = false;
       loadingAll = false;
       erro = e;
     }
   }
+
+  @action
+  void getNextPage() => nextPage++;
 
   @action
   Future<void> getAllIdeas() async {
     try {
       loadingAll = true;
-      erro = null;
+      await getTopIdeas();
+      List<Ideas> newIdeas = await IdeasRepository().getIdeas(nextPage);
       ideasList.clear();
-      List<Ideas> ideas = await IdeasRepository().getAllIdeas();
-      ideasList.addAll(ideas);
-      loadingAll = false;
-    } catch (e) {
-      loadingAll = false;
-      erro = e;
-    }
-  }
-
-  @action
-  Future<void> getTopIdeas() async {
-    try {
-      topIdeas.clear();
-      List<Ideas> ideas = await IdeasRepository().getTopIdeas();
-      topIdeas.addAll(ideas);
-      loadingTop = false;
+      ideasList.addAll(newIdeas);
+      nextPage = 1;
+      lastPage = false;
     } catch (e) {
       loadingTop = false;
       loadingAll = false;
@@ -137,4 +137,18 @@ abstract class _IdeasController with Store {
       return "Digite algo";
     }
   }
+
+  @observable
+  bool lastPage = false;
+
+  @action
+  void addNewsIdeas(List<Ideas> newIdeas) {
+    if (newIdeas.length < IdeasRepository().limit) {
+      lastPage = true;
+    }
+    ideasList.addAll(newIdeas);
+  }
+
+  @computed
+  int get countListIdeas => lastPage ? ideasList.length : ideasList.length + 1;
 }

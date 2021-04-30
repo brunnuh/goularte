@@ -3,6 +3,8 @@ import 'package:goularte/repositories/table_keys.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class IdeasRepository {
+  int limit = 7;
+
   Future postIdea(String description) async {
     ParseUser parseUser = await ParseUser.currentUser();
     final parseObject = ParseObject(keyIdeas);
@@ -21,7 +23,7 @@ class IdeasRepository {
     }
   }
 
-  Future<List<Ideas>> getAllIdeas() async {
+  Future<List<Ideas>> getIdeas(int nextPage) async {
     List<Ideas> ideas = [];
 
     final query = QueryBuilder(ParseObject(keyIdeas));
@@ -31,7 +33,8 @@ class IdeasRepository {
     //query.whereEqualTo(keyIdeasAccepted, true);
     query.orderByDescending(keyIdeasCreatedAt);
     query.includeObject([keyIdeasUser]);
-    //query.setLimit(1);
+    query.setLimit(limit);
+    query.setAmountToSkip(nextPage * limit);
 
     try {
       var response = await query.query();

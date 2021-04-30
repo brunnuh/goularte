@@ -11,7 +11,22 @@ class ArtController = _ArtController with _$ArtController;
 
 abstract class _ArtController with Store {
   _ArtController() {
-    getArts();
+    autorun((_) async {
+      try {
+        final newArts = await ArtRepository().getArts(page);
+        addNewArt(newArts);
+      } catch (e) {
+        lastArt = true;
+      }
+    });
+  }
+
+  @action
+  void addNewArt(List<Art> newArts) {
+    if (newArts.length < ArtRepository().limit) {
+      lastArt = true;
+    }
+    arts.addAll(newArts);
   }
 
   ObservableList<Art> arts = ObservableList<Art>();
@@ -26,8 +41,9 @@ abstract class _ArtController with Store {
   Future<void> getArts() async {
     arts.clear();
     try {
-      final newArts = await ArtRepository().getArts();
+      final newArts = await ArtRepository().getArts(page);
       arts.addAll(newArts);
+      page++;
       erro = null;
     } catch (e) {
       erro = e;
@@ -82,6 +98,15 @@ abstract class _ArtController with Store {
       loadingSave = false;
     }
   }
+
+  @observable
+  int page = 0;
+
+  @action
+  void nextPage() => page++;
+
+  @observable
+  bool lastArt = false;
 
   @action
   void setNullInErro() => erro = null;

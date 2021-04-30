@@ -10,15 +10,26 @@ class ArtView extends StatefulWidget {
 }
 
 class _ArtViewState extends State<ArtView> {
+  ScrollController scrollController;
+  ArtController artController = GetIt.I<ArtController>();
+
   @override
   void initState() {
-    // TODO: implement initState
+    scrollController = ScrollController();
+    scrollController.addListener(artListener);
     super.initState();
     //artController.getArts();
     // pega as artes toda vez que é chamado, mas foi desativado pois o servidor vai cobrar caso aja muitas requisicoes
   }
 
-  ArtController artController = GetIt.I<ArtController>();
+  artListener() async {
+    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange &&
+        !artController.lastArt) {
+      print("final da tela");
+      artController.nextPage();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +56,7 @@ class _ArtViewState extends State<ArtView> {
               child: Observer(
                 builder: (_) {
                   return GridView.builder(
+                    controller: scrollController,
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 180,
                       childAspectRatio: 3 / 5,
@@ -52,7 +64,11 @@ class _ArtViewState extends State<ArtView> {
                     ),
                     itemCount: artController.arts.length,
                     itemBuilder: (_, index) {
-                      return ArtBlock(artController.arts[index]);
+                      if (artController.arts.length > index) {
+                        return ArtBlock(artController.arts[index]);
+                      }
+
+                      return Container();
                     },
                   );
                 },

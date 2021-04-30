@@ -47,6 +47,13 @@ class OptionsView extends StatelessWidget {
                 );
               },
             ),
+            SwitchButton(
+              name: "Modo Dark",
+              active: optionsController.changeNotificationTwitch,
+              lineIcons: LineIcons.moon,
+              onChanged: optionsController.setChangeNotificationTwitch,
+              textStyle: textStyle,
+            )
           ],
         ),
       ),

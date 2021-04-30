@@ -8,12 +8,15 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
 class ArtRepository {
-  Future<List<Art>> getArts() async {
+  int limit = 9;
+
+  Future<List<Art>> getArts(int page) async {
     List<Art> arts = [];
 
     final queryBuilder = QueryBuilder<ParseObject>(ParseObject(keyArts));
 
-    //queryBuilder.setLimit(20);
+    queryBuilder.setLimit(limit);
+    queryBuilder.setAmountToSkip(page * limit);
     queryBuilder.orderByAscending(keyCreatedAt);
 
     queryBuilder.includeObject([keyArtUser]);

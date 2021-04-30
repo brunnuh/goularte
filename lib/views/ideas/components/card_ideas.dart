@@ -36,13 +36,15 @@ class CardIdeas extends StatelessWidget {
                     children: [
                       Container(
                         height: 80,
+                        width: 80,
                         clipBehavior: Clip.antiAlias,
-                        alignment: Alignment.bottomCenter,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(60)),
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(100)),
                         margin: EdgeInsets.only(bottom: 1, top: 16),
                         child: CachedNetworkImage(
                           imageUrl: user.photo,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       Positioned(

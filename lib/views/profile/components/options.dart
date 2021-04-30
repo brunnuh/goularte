@@ -7,6 +7,7 @@ import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/repositories/user_repository.dart';
 import 'package:goularte/views/globals/alert_widget.dart';
 import 'package:goularte/views/help_maintain/help_maintain_view.dart';
+import 'package:goularte/views/login/login_view.dart';
 import 'package:goularte/views/options/options_view.dart';
 import 'package:goularte/views/profile/components/send.dart';
 import 'package:line_icons/line_icons.dart';
@@ -117,7 +118,10 @@ class Options extends StatelessWidget {
             },
           ),
           loginController.user == null
-              ? Container()
+              ? buttonCard("Logar", context, Icons.login_rounded, () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => LoginView()));
+                })
               : buttonCard(
                   "Log out",
                   context,

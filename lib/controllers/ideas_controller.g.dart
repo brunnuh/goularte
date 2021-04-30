@@ -23,6 +23,13 @@ mixin _$IdeasController on _IdeasController, Store {
       (_$erroFieldComputed ??= Computed<String>(() => super.erroField,
               name: '_IdeasController.erroField'))
           .value;
+  Computed<int> _$countListIdeasComputed;
+
+  @override
+  int get countListIdeas =>
+      (_$countListIdeasComputed ??= Computed<int>(() => super.countListIdeas,
+              name: '_IdeasController.countListIdeas'))
+          .value;
 
   final _$erroAtom = Atom(name: '_IdeasController.erro');
 
@@ -51,6 +58,21 @@ mixin _$IdeasController on _IdeasController, Store {
   set loadingAll(bool value) {
     _$loadingAllAtom.reportWrite(value, super.loadingAll, () {
       super.loadingAll = value;
+    });
+  }
+
+  final _$nextPageAtom = Atom(name: '_IdeasController.nextPage');
+
+  @override
+  int get nextPage {
+    _$nextPageAtom.reportRead();
+    return super.nextPage;
+  }
+
+  @override
+  set nextPage(int value) {
+    _$nextPageAtom.reportWrite(value, super.nextPage, () {
+      super.nextPage = value;
     });
   }
 
@@ -84,19 +106,19 @@ mixin _$IdeasController on _IdeasController, Store {
     });
   }
 
-  final _$getAllWithTopAsyncAction =
-      AsyncAction('_IdeasController.getAllWithTop');
+  final _$lastPageAtom = Atom(name: '_IdeasController.lastPage');
 
   @override
-  Future<void> getAllWithTop() {
-    return _$getAllWithTopAsyncAction.run(() => super.getAllWithTop());
+  bool get lastPage {
+    _$lastPageAtom.reportRead();
+    return super.lastPage;
   }
 
-  final _$getAllIdeasAsyncAction = AsyncAction('_IdeasController.getAllIdeas');
-
   @override
-  Future<void> getAllIdeas() {
-    return _$getAllIdeasAsyncAction.run(() => super.getAllIdeas());
+  set lastPage(bool value) {
+    _$lastPageAtom.reportWrite(value, super.lastPage, () {
+      super.lastPage = value;
+    });
   }
 
   final _$getTopIdeasAsyncAction = AsyncAction('_IdeasController.getTopIdeas');
@@ -104,6 +126,13 @@ mixin _$IdeasController on _IdeasController, Store {
   @override
   Future<void> getTopIdeas() {
     return _$getTopIdeasAsyncAction.run(() => super.getTopIdeas());
+  }
+
+  final _$getAllIdeasAsyncAction = AsyncAction('_IdeasController.getAllIdeas');
+
+  @override
+  Future<void> getAllIdeas() {
+    return _$getAllIdeasAsyncAction.run(() => super.getAllIdeas());
   }
 
   final _$likeIdeaAsyncAction = AsyncAction('_IdeasController.likeIdea');
@@ -122,6 +151,17 @@ mixin _$IdeasController on _IdeasController, Store {
 
   final _$_IdeasControllerActionController =
       ActionController(name: '_IdeasController');
+
+  @override
+  void getNextPage() {
+    final _$actionInfo = _$_IdeasControllerActionController.startAction(
+        name: '_IdeasController.getNextPage');
+    try {
+      return super.getNextPage();
+    } finally {
+      _$_IdeasControllerActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setDescription(String value) {
@@ -146,14 +186,28 @@ mixin _$IdeasController on _IdeasController, Store {
   }
 
   @override
+  void addNewsIdeas(List<Ideas> newIdeas) {
+    final _$actionInfo = _$_IdeasControllerActionController.startAction(
+        name: '_IdeasController.addNewsIdeas');
+    try {
+      return super.addNewsIdeas(newIdeas);
+    } finally {
+      _$_IdeasControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 erro: ${erro},
 loadingAll: ${loadingAll},
+nextPage: ${nextPage},
 description: ${description},
 response: ${response},
+lastPage: ${lastPage},
 validField: ${validField},
-erroField: ${erroField}
+erroField: ${erroField},
+countListIdeas: ${countListIdeas}
     ''';
   }
 }

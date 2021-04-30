@@ -14,7 +14,13 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        iconTheme: IconThemeData(color: Colors.redAccent),
+        iconTheme: IconThemeData(
+            color: !loginController.loading ? Colors.redAccent : Colors.grey),
+        leading: IconButton(
+          icon: Icon(LineIcons.arrowLeft),
+          onPressed: () =>
+              !loginController.loading ? Navigator.of(context).pop() : null,
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

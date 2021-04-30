@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:goularte/helpers/extensions.dart';
 import 'package:goularte/models/ideas.dart';
 
+import '../ideas_details.dart';
+
 class FieldIdeasCard extends StatelessWidget {
   final Ideas ideas;
-  final VoidCallback openIdea;
 
   FieldIdeasCard({
     @required this.ideas,
-    @required this.openIdea,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: openIdea,
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => IdeasDetails(idea: ideas)),
+      ),
       child: Container(
         height: 110,
         child: Card(

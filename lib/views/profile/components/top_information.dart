@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:goularte/controllers/ideas_controller.dart';
 import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/controllers/parse_controller.dart';
 import 'package:goularte/views/globals/alert_widget.dart';
@@ -14,6 +15,7 @@ import 'package:line_icons/line_icons.dart';
 class TopInformation extends StatelessWidget {
   LoginController loginController = GetIt.I<LoginController>();
   ParseController parseController = GetIt.I<ParseController>();
+  IdeasController ideasController = GetIt.I<IdeasController>();
 
   ImagePicker imagePicker = ImagePicker();
 
@@ -45,6 +47,8 @@ class TopInformation extends StatelessWidget {
                           if (getPhoto != null) {
                             File photo = File(getPhoto.path);
                             await parseController.uploadPhoto(photo);
+                            await ideasController.getTopIdeas();
+                            await ideasController.getAllIdeas();
                           }
                         },
                         child: Text('Sim'),

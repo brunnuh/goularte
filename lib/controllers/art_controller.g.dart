@@ -69,6 +69,36 @@ mixin _$ArtController on _ArtController, Store {
     });
   }
 
+  final _$pageAtom = Atom(name: '_ArtController.page');
+
+  @override
+  int get page {
+    _$pageAtom.reportRead();
+    return super.page;
+  }
+
+  @override
+  set page(int value) {
+    _$pageAtom.reportWrite(value, super.page, () {
+      super.page = value;
+    });
+  }
+
+  final _$lastArtAtom = Atom(name: '_ArtController.lastArt');
+
+  @override
+  bool get lastArt {
+    _$lastArtAtom.reportRead();
+    return super.lastArt;
+  }
+
+  @override
+  set lastArt(bool value) {
+    _$lastArtAtom.reportWrite(value, super.lastArt, () {
+      super.lastArt = value;
+    });
+  }
+
   final _$getArtsAsyncAction = AsyncAction('_ArtController.getArts');
 
   @override
@@ -101,6 +131,17 @@ mixin _$ArtController on _ArtController, Store {
       ActionController(name: '_ArtController');
 
   @override
+  void addNewArt(List<Art> newArts) {
+    final _$actionInfo = _$_ArtControllerActionController.startAction(
+        name: '_ArtController.addNewArt');
+    try {
+      return super.addNewArt(newArts);
+    } finally {
+      _$_ArtControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setExistForced() {
     final _$actionInfo = _$_ArtControllerActionController.startAction(
         name: '_ArtController.setExistForced');
@@ -123,6 +164,17 @@ mixin _$ArtController on _ArtController, Store {
   }
 
   @override
+  void nextPage() {
+    final _$actionInfo = _$_ArtControllerActionController.startAction(
+        name: '_ArtController.nextPage');
+    try {
+      return super.nextPage();
+    } finally {
+      _$_ArtControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setNullInErro() {
     final _$actionInfo = _$_ArtControllerActionController.startAction(
         name: '_ArtController.setNullInErro');
@@ -139,7 +191,9 @@ mixin _$ArtController on _ArtController, Store {
 erro: ${erro},
 loading: ${loading},
 exist: ${exist},
-loadingSave: ${loadingSave}
+loadingSave: ${loadingSave},
+page: ${page},
+lastArt: ${lastArt}
     ''';
   }
 }
