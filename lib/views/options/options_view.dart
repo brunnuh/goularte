@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/options_controller.dart';
 import 'package:goularte/views/options/components/switch_button.dart';
 import 'package:line_icons/line_icons.dart';
 
 class OptionsView extends StatelessWidget {
-  OptionsController optionsController = OptionsController();
+  OptionsController optionsController = GetIt.I<OptionsController>();
 
   TextStyle textStyle = TextStyle(
     fontWeight: FontWeight.w600,
@@ -28,32 +29,23 @@ class OptionsView extends StatelessWidget {
             Observer(
               builder: (_) {
                 return SwitchButton(
-                  name: "Notificações do Youtube",
-                  active: optionsController.changeNotificationYoutube,
-                  lineIcons: LineIcons.youtube,
-                  onChanged: optionsController.setChangeNotificationYoutube,
+                  name: "Notificações",
+                  active: optionsController.changeNotification != null
+                      ? optionsController.changeNotification
+                      : false,
+                  lineIcons: LineIcons.bell,
+                  onChanged: optionsController.setChangeNotification,
                   textStyle: textStyle,
                 );
               },
             ),
-            Observer(
-              builder: (_) {
-                return SwitchButton(
-                  name: "Notificações da Twitch",
-                  active: optionsController.changeNotificationTwitch,
-                  lineIcons: LineIcons.twitch,
-                  onChanged: optionsController.setChangeNotificationTwitch,
-                  textStyle: textStyle,
-                );
-              },
-            ),
-            SwitchButton(
+            /*SwitchButton(
               name: "Modo Dark",
-              active: optionsController.changeNotificationTwitch,
+              active: optionsController.changeNotification,
               lineIcons: LineIcons.moon,
-              onChanged: optionsController.setChangeNotificationTwitch,
+              onChanged: optionsController.setChangeNotification(),
               textStyle: textStyle,
-            )
+            )*/
           ],
         ),
       ),

@@ -61,18 +61,33 @@ mixin _$IdeasController on _IdeasController, Store {
     });
   }
 
-  final _$nextPageAtom = Atom(name: '_IdeasController.nextPage');
+  final _$loadingTopAtom = Atom(name: '_IdeasController.loadingTop');
 
   @override
-  int get nextPage {
-    _$nextPageAtom.reportRead();
-    return super.nextPage;
+  bool get loadingTop {
+    _$loadingTopAtom.reportRead();
+    return super.loadingTop;
   }
 
   @override
-  set nextPage(int value) {
-    _$nextPageAtom.reportWrite(value, super.nextPage, () {
-      super.nextPage = value;
+  set loadingTop(bool value) {
+    _$loadingTopAtom.reportWrite(value, super.loadingTop, () {
+      super.loadingTop = value;
+    });
+  }
+
+  final _$pageAtom = Atom(name: '_IdeasController.page');
+
+  @override
+  int get page {
+    _$pageAtom.reportRead();
+    return super.page;
+  }
+
+  @override
+  set page(int value) {
+    _$pageAtom.reportWrite(value, super.page, () {
+      super.page = value;
     });
   }
 
@@ -153,11 +168,11 @@ mixin _$IdeasController on _IdeasController, Store {
       ActionController(name: '_IdeasController');
 
   @override
-  void getNextPage() {
+  void nextPage() {
     final _$actionInfo = _$_IdeasControllerActionController.startAction(
-        name: '_IdeasController.getNextPage');
+        name: '_IdeasController.nextPage');
     try {
-      return super.getNextPage();
+      return super.nextPage();
     } finally {
       _$_IdeasControllerActionController.endAction(_$actionInfo);
     }
@@ -201,7 +216,8 @@ mixin _$IdeasController on _IdeasController, Store {
     return '''
 erro: ${erro},
 loadingAll: ${loadingAll},
-nextPage: ${nextPage},
+loadingTop: ${loadingTop},
+page: ${page},
 description: ${description},
 response: ${response},
 lastPage: ${lastPage},

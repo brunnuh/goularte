@@ -26,7 +26,6 @@ class _ArtViewState extends State<ArtView> {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange &&
         !artController.lastArt) {
-      print("final da tela");
       artController.nextPage();
     }
   }

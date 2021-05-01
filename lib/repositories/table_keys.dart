@@ -16,3 +16,6 @@ const keyIdeasAccepted = 'accepted';
 const keyIdeasLikes = 'likes';
 const keyIdeasId = "objectId";
 const keyIdeasAlready_voted = "already_voted";
+
+// shared_preferences
+const keyNotification = "notification";

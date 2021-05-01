@@ -22,6 +22,21 @@ class UserRepository {
     }
   }
 
+  Future register(User user) async {
+    final parseUser = ParseUser(user.name, user.password, user.email);
+
+    try {
+      final response = await parseUser.save();
+      if (response.success) {
+        return true;
+      } else {
+        return Future.error(ParseErrors.getDescription(response.error.code));
+      }
+    } catch (e) {
+      return Future.error(ParseErrors.getDescription(e.error.code));
+    }
+  }
+
   Future<User> verifyToken() async {
     final ParseUser parseUser = await ParseUser.currentUser();
 

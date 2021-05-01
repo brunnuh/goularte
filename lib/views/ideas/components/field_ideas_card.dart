@@ -29,9 +29,11 @@ class FieldIdeasCard extends StatelessWidget {
                   tag: ideas.objectId,
                   child: CircleAvatar(
                     radius: 35,
-                    backgroundImage: NetworkImage(
-                      ideas.user.photo,
-                    ),
+                    backgroundImage: ideas.user.photo != null
+                        ? NetworkImage(
+                            ideas.user.photo,
+                          )
+                        : AssetImage("assets/sem-imagem-avatar.png"),
                   ),
                 ),
                 Expanded(

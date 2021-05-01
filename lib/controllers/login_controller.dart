@@ -82,6 +82,7 @@ abstract class _LoginController with Store {
 
   @action
   Future<void> _login() async {
+    FocusScope.of(context).unfocus();
     loading = true;
     try {
       error = null;

@@ -108,12 +108,13 @@ class IdeasDetails extends StatelessWidget {
                           height: 200,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(300),
-                            color: Colors.purple,
                           ),
-                          child: CachedNetworkImage(
-                            imageUrl: idea.user.photo,
-                            fit: BoxFit.cover,
-                          ),
+                          child: idea.user.photo != null
+                              ? CachedNetworkImage(
+                                  imageUrl: idea.user.photo,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset("assets/sem-imagem-avatar.png"),
                         ),
                       ),
                     ),

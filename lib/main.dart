@@ -13,6 +13,8 @@ import 'package:goularte/views/splash/splash_view.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
+import 'controllers/options_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterDownloader.initialize(debug: false);
@@ -28,10 +30,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // inicia o one signal
     OneSignal.shared.init("000939ed-4c49-42b9-906d-c03324223e10");
-
     OneSignal.shared
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
-
     return MaterialApp(
       title: 'goularte app',
       theme: ThemeData(
@@ -56,14 +56,14 @@ class MyApp extends StatelessWidget {
 }
 
 void setupLocators() {
-  GetIt.I.registerSingleton(IdeasController());
   GetIt.I.registerSingleton(LoginController());
   GetIt.I.registerSingleton(ParseController());
+  GetIt.I.registerSingleton(IdeasController());
   GetIt.I.registerSingleton(ArtController());
   GetIt.I.registerSingleton(BaseController());
-
   GetIt.I.registerSingleton(InfoAppController());
   GetIt.I.registerSingleton(SplashController());
+  GetIt.I.registerSingleton(OptionsController());
 }
 
 Future<void> initializeParse() async {
@@ -72,6 +72,6 @@ Future<void> initializeParse() async {
     "https://parseapi.back4app.com/",
     clientKey: "r5GE9zPM5Z9Vfs7VO4QRIBNc3AdnVPSnKfN6XzB9",
     autoSendSessionId: true,
-    debug: true,
+    debug: false,
   );
 }

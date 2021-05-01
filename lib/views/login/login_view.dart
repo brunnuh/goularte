@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/login_controller.dart';
+import 'package:goularte/views/globals/button_custom.dart';
 import 'package:goularte/views/globals/error_box.dart';
+import 'package:goularte/views/register/register_view.dart';
 import 'package:line_icons/line_icons.dart';
 
 class LoginView extends StatelessWidget {
@@ -122,40 +125,44 @@ class LoginView extends StatelessWidget {
                 height: 40,
                 child: Observer(
                   builder: (_) {
-                    return ElevatedButton(
+                    return ButtonCustom(
                       onPressed: loginController.isValidForm,
-                      child: loginController.loading
-                          ? SizedBox(
-                              width: 23,
-                              height: 23,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 4,
-                                valueColor: AlwaysStoppedAnimation(
-                                    Theme.of(context).appBarTheme.color),
-                              ),
-                            )
-                          : Text(
-                              "Login",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
-                        backgroundColor: MaterialStateProperty.all(
-                          !loginController.pressedButton
-                              ? Colors.grey
-                              : Theme.of(context).appBarTheme.color,
-                        ),
-                      ),
+                      loading: loginController.loading,
+                      pressedButton: loginController.pressedButton,
+                      labelTitle: "Login",
                     );
                   },
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    CupertinoPageRoute(
+                      builder: (_) => RegisterView(),
+                    ),
+                  );
+                },
+                child: Container(
+                  child: Text.rich(
+                    TextSpan(
+                      text: "Não tem conta? ",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "cadastrar",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               )
             ],

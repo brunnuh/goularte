@@ -8,17 +8,17 @@ class IdeasController = _IdeasController with _$IdeasController;
 
 abstract class _IdeasController with Store {
   _IdeasController() {
-    getTopIdeas();
+    if (page == 0) {
+      loadingAll = true;
+    }
     autorun((_) async {
-      if (nextPage == 0) {
-        loadingAll = true;
-      }
       try {
-        List<Ideas> newIdeas = await IdeasRepository().getIdeas(nextPage);
+        List<Ideas> newIdeas = await IdeasRepository().getIdeas(page);
         addNewsIdeas(newIdeas);
       } catch (e) {
         lastPage = true;
       }
+      await getTopIdeas();
       loadingAll = false;
     });
   }
@@ -29,11 +29,15 @@ abstract class _IdeasController with Store {
 
   @observable
   bool loadingAll = false;
+
+  @observable
   bool loadingTop = false;
 
-  // é usado para delimitar a paginacao
   @observable
-  int nextPage = 0;
+  int page = 0;
+
+  @action
+  void nextPage() => page++;
 
   ObservableList<Ideas> topIdeas = ObservableList<Ideas>();
 
@@ -53,17 +57,14 @@ abstract class _IdeasController with Store {
   }
 
   @action
-  void getNextPage() => nextPage++;
-
-  @action
   Future<void> getAllIdeas() async {
     try {
       loadingAll = true;
       await getTopIdeas();
-      List<Ideas> newIdeas = await IdeasRepository().getIdeas(nextPage);
+      List<Ideas> newIdeas = await IdeasRepository().getIdeas(page);
       ideasList.clear();
       ideasList.addAll(newIdeas);
-      nextPage = 1;
+      page = 0;
       lastPage = false;
     } catch (e) {
       loadingTop = false;

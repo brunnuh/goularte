@@ -20,16 +20,16 @@ class _IdeasViewState extends State<IdeasView> {
 
   @override
   void initState() {
+    super.initState();
     scrollController = ScrollController();
     scrollController.addListener(scrollListener);
-    super.initState();
   }
 
-  scrollListener() {
+  void scrollListener() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange &&
         !ideasController.lastPage) {
-      ideasController.getNextPage();
+      ideasController.nextPage();
     }
   }
 
