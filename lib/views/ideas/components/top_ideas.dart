@@ -44,7 +44,8 @@ class TopIdeas extends StatelessWidget {
         Observer(builder: (_) {
           if (!ideasController.loadingTop) {
             if (ideasController.topIdeas.isEmpty ||
-                ideasController.topIdeas == null) {
+                ideasController.topIdeas == null ||
+                ideasController.topIdeas.length < 3) {
               return Center(
                 child: Text(
                   "Ainda não há top Ideias.",
@@ -54,7 +55,7 @@ class TopIdeas extends StatelessWidget {
                   ),
                 ),
               );
-            } else {
+            } else if (ideasController.topIdeas.length == 3) {
               return Container(
                 height: 140,
                 child: ListView(
@@ -106,6 +107,7 @@ class TopIdeas extends StatelessWidget {
                 ),
               );
             }
+            return Container();
           } else {
             return LinearProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(

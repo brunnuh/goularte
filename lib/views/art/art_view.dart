@@ -54,22 +54,35 @@ class _ArtViewState extends State<ArtView> {
             Expanded(
               child: Observer(
                 builder: (_) {
-                  return GridView.builder(
-                    controller: scrollController,
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 180,
-                      childAspectRatio: 3 / 5,
-                      //crossAxisSpacing: 1,
-                    ),
-                    itemCount: artController.arts.length,
-                    itemBuilder: (_, index) {
-                      if (artController.arts.length > index) {
-                        return ArtBlock(artController.arts[index]);
-                      }
+                  if (artController.arts.length > 0) {
+                    return GridView.builder(
+                      controller: scrollController,
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 180,
+                        childAspectRatio: 3 / 5,
+                        //crossAxisSpacing: 1,
+                      ),
+                      itemCount: artController.arts.length,
+                      itemBuilder: (_, index) {
+                        if (artController.arts.length > index) {
+                          return ArtBlock(artController.arts[index]);
+                        }
 
-                      return Container();
-                    },
-                  );
+                        return Container();
+                      },
+                    );
+                  } else {
+                    return Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Ainda não há Artes",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    );
+                  }
                 },
               ),
             ),

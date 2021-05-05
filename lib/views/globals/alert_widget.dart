@@ -18,7 +18,7 @@ class AlertWidget extends StatelessWidget {
         content,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 19,
         ),
       ),
       title: icon,

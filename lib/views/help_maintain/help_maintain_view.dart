@@ -46,7 +46,7 @@ class HelpMaintainView extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        "Esse app foi criado com o intuito de agregar meus estudos e quem sabe alavancar minha carreira como desenvolvedor mobile, então ajude a mantê-lo de pé.",
+                        "Esse app foi criado com o intuito de agregar meus estudos, alavancar minha carreira como desenvolvedor mobile e porque sou fã do Gou, então ajude a mantê-lo de pé.",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
@@ -64,12 +64,12 @@ class HelpMaintainView extends StatelessWidget {
                         height: 10,
                       ),
                       CustomButton(
-                        fieldText: "donation@gmail.com",
+                        fieldText: "desenvolvedorbs@gmail.com",
                         iconData: Icons.content_copy,
                         onTap: () async {
                           helpController.setMsgCopy();
                           Clipboard.setData(
-                              ClipboardData(text: "donation@gmail.com"));
+                              ClipboardData(text: "desenvolvedorbs@gmail.com"));
                           await Future.delayed(Duration(seconds: 1));
                           helpController.setMsgCopy();
                         },

@@ -35,7 +35,6 @@ class SharedPreference {
       sharedPreference.setString(
           keyLastDateSubmittedIdeas, dateTime.toString());
     }
-    print(amount);
     sharedPreference.setInt(keyTimesSubmittedIdeas, amount);
     return true;
   }

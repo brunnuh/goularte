@@ -54,7 +54,19 @@ class _IdeasViewState extends State<IdeasView> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            ListIdeas(),
+            ideasController.ideasList.length > 0
+                ? ListIdeas()
+                : Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(top: 30),
+                    child: Text(
+                      "Ainda não há ideias",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ),
             const SizedBox(
               height: 35,
             ),

@@ -20,10 +20,11 @@ class Login extends StatelessWidget {
           onTap: () => Navigator.of(context)
               .push(MaterialPageRoute(builder: (_) => LoginView())),
           child: Text(
-            "Faça login agora",
+            "Para enviar artes e ideias faça login",
             style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey,
+              fontSize: 14,
             ),
           ),
         ),

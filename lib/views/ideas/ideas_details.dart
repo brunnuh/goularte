@@ -73,7 +73,7 @@ class IdeasDetails extends StatelessWidget {
                                   ideaController.clearFields();
                                   Navigator.of(context).pop();
                                 },
-                                child: Text("ok"),
+                                child: Text("OK"),
                               )
                             ]);
                       },
