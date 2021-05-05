@@ -40,6 +40,9 @@ class RegisterView extends StatelessWidget {
                     builder: (_) {
                       return TextFieldCustom(
                         labelText: "Usuario",
+                        suffixIcon: null,
+                        obscureText: false,
+                        enable: true, // modificar n
                         keyboardType: TextInputType.name,
                         onChanged: registerController.setName,
                         erroText: registerController.errorName,
@@ -53,6 +56,9 @@ class RegisterView extends StatelessWidget {
                     builder: (_) {
                       return TextFieldCustom(
                         labelText: "E-mail",
+                        suffixIcon: null,
+                        obscureText: false,
+                        enable: true, // modificar n
                         keyboardType: TextInputType.emailAddress,
                         onChanged: registerController.setEmail,
                         erroText: registerController.errorEmail,
@@ -65,6 +71,9 @@ class RegisterView extends StatelessWidget {
                   Observer(builder: (_) {
                     return TextFieldCustom(
                       labelText: "Senha",
+                      suffixIcon: null,
+                      obscureText: true,
+                      enable: true, // modificar n
                       keyboardType: TextInputType.visiblePassword,
                       onChanged: registerController.setPassword,
                       erroText: registerController.erroPassword,
@@ -77,6 +86,9 @@ class RegisterView extends StatelessWidget {
                     builder: (_) {
                       return TextFieldCustom(
                         labelText: "Confirmar senha",
+                        suffixIcon: null,
+                        obscureText: true,
+                        enable: true, // modificar n
                         keyboardType: TextInputType.visiblePassword,
                         onChanged: registerController.setConfirmPassword,
                         erroText: registerController.erroConfirmPassword,

@@ -24,6 +24,21 @@ mixin _$BaseController on _BaseController, Store {
     });
   }
 
+  final _$noInternetAtom = Atom(name: '_BaseController.noInternet');
+
+  @override
+  bool get noInternet {
+    _$noInternetAtom.reportRead();
+    return super.noInternet;
+  }
+
+  @override
+  set noInternet(bool value) {
+    _$noInternetAtom.reportWrite(value, super.noInternet, () {
+      super.noInternet = value;
+    });
+  }
+
   final _$_BaseControllerActionController =
       ActionController(name: '_BaseController');
 
@@ -39,9 +54,21 @@ mixin _$BaseController on _BaseController, Store {
   }
 
   @override
+  void setStatusInternet(bool value) {
+    final _$actionInfo = _$_BaseControllerActionController.startAction(
+        name: '_BaseController.setStatusInternet');
+    try {
+      return super.setStatusInternet(value);
+    } finally {
+      _$_BaseControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-page: ${page}
+page: ${page},
+noInternet: ${noInternet}
     ''';
   }
 }

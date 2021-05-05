@@ -16,6 +16,13 @@ mixin _$IdeasController on _IdeasController, Store {
       (_$validFieldComputed ??= Computed<bool>(() => super.validField,
               name: '_IdeasController.validField'))
           .value;
+  Computed<bool> _$onButtonComputed;
+
+  @override
+  bool get onButton =>
+      (_$onButtonComputed ??= Computed<bool>(() => super.onButton,
+              name: '_IdeasController.onButton'))
+          .value;
   Computed<String> _$erroFieldComputed;
 
   @override
@@ -164,6 +171,15 @@ mixin _$IdeasController on _IdeasController, Store {
     return _$postIdeaAsyncAction.run(() => super.postIdea());
   }
 
+  final _$onPressedSubmittedAsyncAction =
+      AsyncAction('_IdeasController.onPressedSubmitted');
+
+  @override
+  Future<Widget> onPressedSubmitted(BuildContext context) {
+    return _$onPressedSubmittedAsyncAction
+        .run(() => super.onPressedSubmitted(context));
+  }
+
   final _$_IdeasControllerActionController =
       ActionController(name: '_IdeasController');
 
@@ -222,6 +238,7 @@ description: ${description},
 response: ${response},
 lastPage: ${lastPage},
 validField: ${validField},
+onButton: ${onButton},
 erroField: ${erroField},
 countListIdeas: ${countListIdeas}
     ''';

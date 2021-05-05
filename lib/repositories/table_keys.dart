@@ -19,3 +19,5 @@ const keyIdeasAlready_voted = "already_voted";
 
 // shared_preferences
 const keyNotification = "notification";
+const keyTimesSubmittedIdeas = "timesSubmittedIdeas";
+const keyLastDateSubmittedIdeas = "lastDateSubmitted";

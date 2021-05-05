@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/login_controller.dart';
 import 'package:goularte/views/globals/button_custom.dart';
 import 'package:goularte/views/globals/error_box.dart';
+import 'package:goularte/views/globals/text_field_custom.dart';
 import 'package:goularte/views/register/register_view.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -52,28 +53,14 @@ class LoginView extends StatelessWidget {
               ),
               Observer(
                 builder: (_) {
-                  return TextField(
+                  return TextFieldCustom(
                     onChanged: loginController.setEmail,
-                    enabled: !loginController.loading,
-                    cursorColor: Theme.of(context).appBarTheme.color,
-                    decoration: InputDecoration(
-                      errorText: loginController.errorEmail,
-                      labelText: 'E-mail',
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                        ),
-                      ),
-                      isDense: true,
-                    ),
+                    enable: !loginController.loading,
+                    erroText: loginController.errorEmail,
+                    obscureText: false,
+                    labelText: "E-mail",
                     keyboardType: TextInputType.emailAddress,
+                    suffixIcon: null,
                   );
                 },
               ),
@@ -82,38 +69,21 @@ class LoginView extends StatelessWidget {
               ),
               Observer(
                 builder: (_) {
-                  return TextField(
+                  return TextFieldCustom(
                     onChanged: loginController.setPassword,
-                    enabled: !loginController.loading,
-                    cursorColor: Theme.of(context).appBarTheme.color,
-                    decoration: InputDecoration(
-                      labelText: 'Senha',
-                      errorText: loginController.errorPassword,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          !loginController.passwordVisible
-                              ? LineIcons.eye
-                              : LineIcons.eyeSlashAlt,
-                        ),
-                        onPressed: loginController.setVisible,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                        borderSide: BorderSide(
-                          color: Theme.of(context).appBarTheme.color ??
-                              Colors.redAccent,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                        borderSide: BorderSide(
-                          color: Theme.of(context).appBarTheme.color ??
-                              Colors.redAccent,
-                        ),
-                      ),
-                      isDense: true,
-                    ),
+                    erroText: loginController.errorPassword,
+                    keyboardType: TextInputType.text,
+                    enable: !loginController.loading,
                     obscureText: !loginController.passwordVisible,
+                    labelText: "Senha",
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        !loginController.passwordVisible
+                            ? LineIcons.eye
+                            : LineIcons.eyeSlashAlt,
+                      ),
+                      onPressed: loginController.setVisible,
+                    ),
                   );
                 },
               ),

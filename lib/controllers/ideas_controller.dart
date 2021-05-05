@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:goularte/models/ideas.dart';
 import 'package:goularte/repositories/ideas_repository.dart';
+import 'package:goularte/repositories/shared_preference.dart';
+import 'package:goularte/views/globals/alert_widget.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:mobx/mobx.dart';
 
 part 'ideas_controller.g.dart';
@@ -104,13 +109,20 @@ abstract class _IdeasController with Store {
   @action
   Future<void> postIdea() async {
     try {
+      erro = null;
       loadingAll = true;
-      response = await IdeasRepository().postIdea(description);
-      loadingAll = false;
+      bool canSend = await SharedPreference().amountSubmittedIdeas();
+
+      if (canSend) {
+        response = await IdeasRepository().postIdea(description);
+      } else {
+        erro =
+            "Limite maximo de ideias que podem ser enviadas por dia atigindo";
+      }
     } catch (e) {
-      loadingAll = false;
       erro = e;
     }
+    loadingAll = false;
   }
 
   @action
@@ -123,6 +135,7 @@ abstract class _IdeasController with Store {
   @computed
   bool get validField =>
       description != null && description != "" && description.length > length;
+  @computed
   bool get onButton =>
       description != null &&
       description.isNotEmpty &&
@@ -152,4 +165,77 @@ abstract class _IdeasController with Store {
 
   @computed
   int get countListIdeas => lastPage ? ideasList.length : ideasList.length + 1;
+
+  @action
+  Future<Widget> onPressedSubmitted(BuildContext context) async {
+    if (onButton) {
+      await postIdea();
+      setDescription("");
+      Navigator.of(context).pop();
+      if (response != null && response) {
+        return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertWidget(
+              content: "Aguarde a ideia ser liberada",
+              icon: Icon(
+                LineIcons.check,
+                color: Colors.green,
+                size: 60,
+              ),
+              actions: [
+                FlatButton(
+                  onPressed: () {
+                    clearFields();
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Ok"),
+                )
+              ],
+            );
+          },
+        );
+      } else if (erro != null) {
+        return showDialog(
+            context: context,
+            builder: (context) {
+              return AlertWidget(
+                content: erro,
+                icon: Icon(LineIcons.exclamationCircle, color: Colors.red),
+                actions: [
+                  FlatButton(
+                    onPressed: () {
+                      clearFields();
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Ok"),
+                  )
+                ],
+              );
+            });
+      } else {
+        return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertWidget(
+              content: "Falha ao tentar enviar, por favor tente mais tarde.",
+              icon: Icon(
+                LineIcons.exclamationCircle,
+                color: Colors.red,
+                size: 60,
+              ),
+              actions: [
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text("Ok"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } else {
+      return Container();
+    }
+  }
 }

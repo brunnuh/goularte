@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:goularte/controllers/ideas_controller.dart';
-import 'package:goularte/views/globals/alert_widget.dart';
 import 'package:goularte/views/globals/loading.dart';
-import 'package:line_icons/line_icons.dart';
 
 class FieldsIdeas extends StatelessWidget {
   IdeasController ideasController = GetIt.I<IdeasController>();
@@ -89,90 +87,11 @@ class FieldsIdeas extends StatelessWidget {
                                     fontSize: 18,
                                   ),
                                 ),
-                                color: Theme.of(context).appBarTheme.color,
-                                disabledColor: Colors.blueGrey,
-                                onPressed: ideasController.onButton
-                                    ? () async {
-                                        await ideasController.postIdea();
-                                        ideasController.setDescription("");
-                                        Navigator.of(context).pop();
-                                        if (ideasController.response != null &&
-                                            ideasController.response) {
-                                          return showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertWidget(
-                                                content:
-                                                    "Aguarde a ideia ser liberada",
-                                                icon: Icon(
-                                                  LineIcons.check,
-                                                  color: Colors.green,
-                                                  size: 60,
-                                                ),
-                                                actions: [
-                                                  FlatButton(
-                                                    onPressed: () {
-                                                      ideasController
-                                                          .clearFields();
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text("Ok"),
-                                                  )
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        } else if (ideasController.erro !=
-                                            null) {
-                                          return showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertWidget(
-                                                  content: ideasController.erro,
-                                                  icon: Icon(
-                                                      LineIcons
-                                                          .exclamationCircle,
-                                                      color: Colors.red),
-                                                  actions: [
-                                                    FlatButton(
-                                                      onPressed: () {
-                                                        ideasController
-                                                            .clearFields();
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text("Ok"),
-                                                    )
-                                                  ],
-                                                );
-                                              });
-                                        } else {
-                                          return showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertWidget(
-                                                content:
-                                                    "Falha ao tentar enviar, por favor tente mais tarde.",
-                                                icon: Icon(
-                                                  LineIcons.exclamationCircle,
-                                                  color: Colors.red,
-                                                  size: 60,
-                                                ),
-                                                actions: [
-                                                  FlatButton(
-                                                    onPressed: () =>
-                                                        Navigator.of(context)
-                                                            .pop(),
-                                                    child: Text("Ok"),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        }
-                                      }
-                                    : null,
+                                color: ideasController.onButton
+                                    ? Theme.of(context).appBarTheme.color
+                                    : Colors.blueGrey,
+                                onPressed: () =>
+                                    ideasController.onPressedSubmitted(context),
                               );
                             },
                           ),

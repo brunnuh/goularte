@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goularte/repositories/shared_preference.dart';
 import 'package:goularte/views/base/base_view.dart';
 
 class SplashView extends StatefulWidget {
@@ -20,7 +21,12 @@ class _SplashViewState extends State<SplashView> {
     _Splash.start(context);
     // verificacoes antes de entrar
     // ...
-    await Future.delayed(Duration(seconds: 2));
+    await SharedPreference().isAnotherDay().then((value) {
+      if (value) {
+        SharedPreference().amountSubmittedIdeas(reset: true);
+      }
+    });
+    await Future.delayed(Duration(seconds: 1));
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => BaseView()), (route) => false);
   }

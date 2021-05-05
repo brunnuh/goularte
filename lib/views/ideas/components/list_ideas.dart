@@ -23,10 +23,9 @@ class ListIdeas extends StatelessWidget {
             return FieldIdeasCard(ideas: idea);
           } else if (!ideasController.lastPage) {
             return Container(
-              height: 50,
-              margin: EdgeInsets.symmetric(vertical: 20),
-              padding: EdgeInsets.symmetric(horizontal: 165, vertical: 10),
-              child: CircularProgressIndicator(),
+              height: 30,
+              padding: EdgeInsets.symmetric(vertical: 12),
+              child: LinearProgressIndicator(),
             );
           }
           return Container();

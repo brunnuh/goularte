@@ -28,7 +28,8 @@ class _IdeasViewState extends State<IdeasView> {
   void scrollListener() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange &&
-        !ideasController.lastPage) {
+        !ideasController.lastPage &&
+        !ideasController.loadingAll) {
       ideasController.nextPage();
     }
   }
